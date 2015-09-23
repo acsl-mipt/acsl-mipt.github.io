@@ -17,40 +17,38 @@
 		<div class="page-header">
 			<h1><a href="http://acsl.mipt.ru/">ЛПСУ</a> / <small>открытый исходный код</small></h1>
 		</div>
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Главная</a></li>
-					</ul>
-				</div>
-			</div>
+	
+		<nav style="margin-bottom: 1.4em">
+			<ul class="nav nav-pills">
+				<li class="active" role="presentation"><a href="#">Главная</a></li>
+			</ul>
 		</nav>
 
 		<div class="jumbotron">
-			<p>
+			<p class="text-muted">
 				<a href="http://acsl.mipt.ru/">Лаборатория перспективных систем управления при Физтехе</a> занимается проектированием и разработкой полного стека технологий для управления разнородными беспилотными аппаратами как по отдельности, так и в составе групп.
-			<p>
+			<p class="text-muted">
 				Большая часть разрабатываемых в рамках лаборатории технологий и продуктов доступна бесплатно в открытом виде под <abbr title="MIT, в основном">свободными лицензиями</abbr> на этом сайте.
 		</div>
+
 		<h2>Разрабатываемые продукты и технологии</h2>
 		<h3>Приложения</h3>
 		<ul>
-			<li>Мобильный пункт управления <span class="label label-warning">будет доступен позже</span> &mdash; приложение для управления беспилотными аппаратами работающими по протоколам <code>Mavlink</code> и борт-земля. Используемые технологии: <code>C++</code>, <code>Qt</code>.
-			<li>ГеоТаргет &mdash; приложение для управления беспилотными аппаратами работающими по протоколам <code>Mavlink</code> и борт-земля с модулем картографии в 3D. Используемые технологии: <code>Java</code>, <code>Akka</code>, <code>NASA WorldWind</code>.
+			<li>Мобильный пункт управления <sup><span class="label label-danger">&beta;</span> <span class="label label-warning">будет доступен позже</span></sup> &mdash; приложение для управления беспилотными аппаратами работающими по протоколам <code>Mavlink</code> и борт-земля. Используемые технологии: <code>C++</code>, <code>Qt</code>.
+			<li>ГеоТаргет <sup><span class="label label-danger">dev</span></sup> &mdash; приложение для управления беспилотными аппаратами работающими по протоколам <code>Mavlink</code> и борт-земля с модулем картографии в 3D. Используемые технологии: <code>Java</code>, <code>JavaFX</code>, <code>Akka</code>, <code>NASA WorldWind</code>.
 		</ul>
 		<h3>Библиотеки и средства разработки</h3>
 		<ul>
-			<li>Бортовая стандартная библиотека для языка <code>C</code>
-			<li>Библиотека для языков <code>C</code> и <code>C++</code> реализующая работу по протоколу борт-земля для бортовых систем <span class="label label-warning">будет доступна позже</span>
-			<li>Предметная модель описания бортовых систем Decode, рантайм для работы с моделью и средства разработки моделей бортовых компонентов для языка <code>Java</code>, в том числе в виде плагина для <code>JetBrains IDEA</code>
+			<li>BMCL <sup><span class="label label-danger">dev</span></sup> &mdash; бортовая стандартная библиотека для языка <code>C</code>
+			<li>Библиотека для языков <code>C</code> и <code>C++</code> реализующая работу по протоколу борт-земля для бортовых систем <sup><span class="label label-warning">будет доступна позже</span></sup>
+			<li>Предметная модель описания бортовых систем Decode <sup><span class="label label-danger">dev</span></sup>, рантайм для работы с моделью и средства разработки моделей бортовых компонентов для языка <code>Java</code>, в том числе в виде плагина для <code>JetBrains IDEA</code>
 		</ul>
 		<h3>Протоколы и стандарты</h3>
 		<ul>
-			<li>Протокольный фреймворк Photon Protocol Framework (PPF)
-			<li>Протокол борт-земля <span class="label label-warning">будет доступен позже</span>
+			<li>Протокольный фреймворк <abbr title="Photon Protocol Framework">PPF</abbr> <sup><span class="label label-danger">&alpha;</span></sup>
+			<li>Протокол борт-земля <sup><span class="label label-danger">dev</span> <span class="label label-warning">будет доступен позже</span></sup>
 		</ul>
-		<div class="panel panel-default">
+		<div class="panel panel-default" style="margin-top: 2em">
 			<div class="panel-body">
 				&copy; 2015 <a href="http://acsl.mipt.ru/">ACSL</a>
 			</div>
