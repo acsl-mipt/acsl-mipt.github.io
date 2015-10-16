@@ -1,3 +1,6 @@
 [submodule "ppf"]
 	path = ppf
 	url = https://github.com/acsl-mipt/ppf.git
+[submodule "decode"]
+	path = decode
+	url = https://github.com/acsl-mipt/decode.git
