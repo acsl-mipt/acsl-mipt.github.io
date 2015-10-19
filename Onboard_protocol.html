@@ -789,9 +789,12 @@
     <div>
     <pre style="background-color: #2b2b2b"><span class="s0">namespace </span><span class="s1">ru.mipt.acsl
 
+</span><span class="s2">&quot;Строка&quot;</span><span class="s1">
 </span><span class="s0">type </span><span class="s1">string [u8]
 
-</span><span class="s0">type </span><span class="s1">component_number_guid_pair </span><span class="s0">struct</span><span class="s1">
+</span><span class="s2">&quot;Пара номер компонента и его уникальный идентификатор&quot;</span><span class="s1">
+</span><span class="s0">type </span><span class="s1">component_number_guid_pair
+</span><span class="s0">struct</span><span class="s1">
 (
   </span><span class="s2">'Номер компонента в пределах устройства'</span><span class="s1">
   </span><span class="s0">ber  </span><span class="s1">number</span><span class="s3">,</span><span class="s1">
@@ -799,7 +802,9 @@
   guid guid</span><span class="s3">,</span><span class="s1">
 )
 
-</span><span class="s0">type </span><span class="s1">short_id </span><span class="s0">struct</span><span class="s1">
+</span><span class="s2">&quot;Идентификатор устройства и его корневого компонента&quot;</span><span class="s1">
+</span><span class="s0">type </span><span class="s1">short_id
+</span><span class="s0">struct</span><span class="s1">
 (
   </span><span class="s2">'Уникальный идентификатор устройства'</span><span class="s1">
   guid  deviceGuid</span><span class="s3">,</span><span class="s1">
@@ -807,6 +812,7 @@
   guid  rootComponentGuid</span><span class="s3">,</span><span class="s1">
 )
 
+</span><span class="s2">&quot;Идентификатор устройства и всех его компонентов&quot;</span><span class="s1">
 </span><span class="s0">type </span><span class="s1">full_id </span><span class="s0">struct</span><span class="s1">
 (
     short_id shortId</span><span class="s3">,</span><span class="s1">
@@ -823,22 +829,25 @@
   )
 
   </span><span class="s2">'Запросить идентификатор устройства и идентификатор компонента устройства'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">requestShortId</span><span class="s0">:</span><span class="s4">0</span><span class="s1">() -&gt; short_id
+  </span><span class="s0">command </span><span class="s1">requestShortId() -&gt; short_id
 
   </span><span class="s2">'Запросить идентификатор устройства, компонента устройства и всех его подкомпонентов'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">requestFullId </span><span class="s0">:</span><span class="s4">1</span><span class="s1">() -&gt; full_id
+  </span><span class="s0">command </span><span class="s1">requestFullId() -&gt; full_id
 
   </span><span class="s2">'Запросить идентификатор компонента по номеру'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">requestComponentGuid</span><span class="s0">:</span><span class="s4">2</span><span class="s1">
-  (
-    </span><span class="s0">ber </span><span class="s1">componentNumber
-  ) -&gt; guid
+  </span><span class="s0">command </span><span class="s1">requestComponentGuid(</span><span class="s0">ber </span><span class="s1">componentNumber) -&gt; guid
 }
 
+</span><span class="s2">&quot;Ошибка начала режима сегментированной выдачи&quot;</span><span class="s1">
 </span><span class="s0">type </span><span class="s1">segment_start_ack_error </span><span class="s0">enum ber </span><span class="s1">(ALREADY_STARTED = </span><span class="s4">1</span><span class="s3">, </span><span class="s1">INVALID_STATE = </span><span class="s4">2</span><span class="s1">)
+
+</span><span class="s2">&quot;Ошибка останова режима сегментированной выдачи&quot;</span><span class="s1">
 </span><span class="s0">type </span><span class="s1">segment_stop_ack_error </span><span class="s0">enum ber </span><span class="s1">(NOT_STARTED = </span><span class="s4">1</span><span class="s3">, </span><span class="s1">INVALID_STATE = </span><span class="s4">2</span><span class="s1">)
+
+</span><span class="s2">&quot;Ошибка обработки получения сегмента&quot;</span><span class="s1">
 </span><span class="s0">type </span><span class="s1">segment_process_ack_error </span><span class="s0">enum ber </span><span class="s1">(INVALID_STATE = </span><span class="s4">1</span><span class="s1">)
 
+</span><span class="s2">&quot;Компонент режима сегментированной передачи ТМ-сообщения&quot;</span><span class="s1">
 </span><span class="s0">component </span><span class="s1">Segment
 {
   </span><span class="s0">parameters</span><span class="s1">
@@ -870,12 +879,14 @@
   </span><span class="s0">command </span><span class="s1">stopAckOnEverySegmentMode</span><span class="s0">:</span><span class="s4">5</span><span class="s1">() -&gt; segment_stop_ack_error?
 }
 
+</span><span class="s2">&quot;Компонент сервера поддерживающиего сегментированную передачу ТМ-сообщения&quot;</span><span class="s1">
 </span><span class="s0">component </span><span class="s1">SegmentSender </span><span class="s0">with </span><span class="s1">Segment
 {
   </span><span class="s2">'Обработать подтверждения о получении сегментов'</span><span class="s1">
   </span><span class="s0">command </span><span class="s1">processSegmentsAck</span><span class="s0">:</span><span class="s4">0</span><span class="s1">([</span><span class="s0">ber</span><span class="s3">, </span><span class="s4">1</span><span class="s1">..*] segmentsReceived) -&gt; segment_process_ack_error?
 }
 
+</span><span class="s2">&quot;Компонент клиента поддерживающего сегментированное получение ТМ-сообщения&quot;</span><span class="s1">
 </span><span class="s0">component </span><span class="s1">SegmentReceiver </span><span class="s0">with </span><span class="s1">Segment
 {
   </span><span class="s0">parameters</span><span class="s1">
@@ -885,17 +896,17 @@
   )
 
   </span><span class="s2">'Перечень полученных сегментов'</span><span class="s1">
-  </span><span class="s0">message </span><span class="s1">segmentsReceived</span><span class="s0">:</span><span class="s4">0</span><span class="s1">
-  </span><span class="s0">status</span><span class="s1">
+  </span><span class="s0">status </span><span class="s1">segmentsReceived
   (
     segmentsReceived</span><span class="s3">,</span><span class="s1">
   )
 
   </span><span class="s2">'Запросить перечень полученных сегментов'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">requestSegmentsAck</span><span class="s0">:</span><span class="s4">0</span><span class="s1">() -&gt; [</span><span class="s0">ber</span><span class="s1">]
+  </span><span class="s0">command </span><span class="s1">requestSegmentsAck() -&gt; [</span><span class="s0">ber</span><span class="s1">]
 }
 
 </span><span class="s5">/* Tm */</span><span class="s1">
+
 </span><span class="s2">'Циклический массив'</span><span class="s1">
 </span><span class="s0">type </span><span class="s1">ring_buf </span><span class="s0">struct</span><span class="s1">
 (
@@ -944,28 +955,28 @@
   )
 
   </span><span class="s2">'Выдать событийное ТМ-сообщение'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">sendEventMessage</span><span class="s0">:</span><span class="s4">0</span><span class="s1">(</span><span class="s2">'Информация о событии' </span><span class="s1">event_info eventInfo) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">sendEventMessage(</span><span class="s2">'Информация о событии' </span><span class="s1">event_info eventInfo) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Выдать статусное сообщение во внеочередную выдачу'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">sendStatusMessage</span><span class="s0">:</span><span class="s4">1</span><span class="s1">(comp_msg componentMessage) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">sendStatusMessage(comp_msg componentMessage) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Установить запрос на выдачу в соответствии с приоритетом'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">setMessageRequest</span><span class="s0">:</span><span class="s4">2</span><span class="s1">(comp_msg componentMessage</span><span class="s3">, </span><span class="s2">'Приоритет' </span><span class="s0">ber </span><span class="s1">priority) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">setMessageRequest(comp_msg componentMessage</span><span class="s3">, </span><span class="s2">'Приоритет' </span><span class="s0">ber </span><span class="s1">priority) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Снять запрос на выдачу в соответствии с приоритетом'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">clearMessageRequest</span><span class="s0">:</span><span class="s4">3</span><span class="s1">(comp_msg componentMessage</span><span class="s3">, </span><span class="s2">'Приоритет' </span><span class="s0">ber </span><span class="s1">priority) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">clearMessageRequest(comp_msg componentMessage</span><span class="s3">, </span><span class="s2">'Приоритет' </span><span class="s0">ber </span><span class="s1">priority) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Запретить формирование ТМ-сообщения'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">denyMessage</span><span class="s0">:</span><span class="s4">4</span><span class="s1">(comp_msg componentMessage) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">denyMessage(comp_msg componentMessage) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Снять запрет на формирование ТМ-сообщения'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">allowMessage</span><span class="s0">:</span><span class="s4">5</span><span class="s1">(comp_msg componentMessage) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">allowMessage(comp_msg componentMessage) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Установить запрет на формирование и выдачу события'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">denyEvent</span><span class="s0">:</span><span class="s4">6</span><span class="s1">(event_info eventInfo) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">denyEvent(event_info eventInfo) -&gt; tm_cmd_error?
 
   </span><span class="s2">'Снять запрет на формирование и выдачу события'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">allowEvent</span><span class="s0">:</span><span class="s4">7</span><span class="s1">(event_info eventInfo) -&gt; tm_cmd_error?
+  </span><span class="s0">command </span><span class="s1">allowEvent(event_info eventInfo) -&gt; tm_cmd_error?
 }
 
 </span><span class="s5">/* Scripts */</span><span class="s1">
@@ -1024,7 +1035,7 @@
   )
 
   </span><span class="s2">'Загрузить скрипт'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">uploadScript</span><span class="s0">:</span><span class="s4">0</span><span class="s1">
+  </span><span class="s0">command </span><span class="s1">uploadScript
   (
     script_id scriptId</span><span class="s3">,</span><span class="s1">
     [u8]      scriptData</span><span class="s3">,</span><span class="s1">
@@ -1032,30 +1043,28 @@
   ) -&gt; scripting_error?
 
   </span><span class="s2">'Удалить скрипт'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">deleteScript</span><span class="s0">:</span><span class="s4">1</span><span class="s1">(script_id scriptId) -&gt; scripting_error?
+  </span><span class="s0">command </span><span class="s1">deleteScript(script_id scriptId) -&gt; scripting_error?
 
   </span><span class="s2">'Запустить скрипт незамедлительно'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">runScriptNow</span><span class="s0">:</span><span class="s4">2</span><span class="s1">(script_id scriptId) -&gt; scripting_error?
+  </span><span class="s0">command </span><span class="s1">runScriptNow(script_id scriptId) -&gt; scripting_error?
 
   </span><span class="s2">'Запланировать запуск скрипта'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">scheduleScriptRun</span><span class="s0">:</span><span class="s4">3</span><span class="s1">(script_run_timing scriptRunTiming) -&gt; scripting_error?
+  </span><span class="s0">command </span><span class="s1">scheduleScriptRun(script_run_timing scriptRunTiming) -&gt; scripting_error?
 
   </span><span class="s2">'Активировать запланированный запуск скрипта'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">enableScriptRunTiming</span><span class="s0">:</span><span class="s4">4</span><span class="s1">(guid scriptRunTimingId) -&gt; scripting_error?
+  </span><span class="s0">command </span><span class="s1">enableScriptRunTiming(guid scriptRunTimingId) -&gt; scripting_error?
 
   </span><span class="s2">'Деактивировать запланированный запуск скрипта'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">disableScriptRunTiming</span><span class="s0">:</span><span class="s4">5</span><span class="s1">(guid scriptRunTimingId) -&gt; scripting_error?
+  </span><span class="s0">command </span><span class="s1">disableScriptRunTiming(guid scriptRunTimingId) -&gt; scripting_error?
 
   </span><span class="s2">'Перечень загруженных скриптов'</span><span class="s1">
-  </span><span class="s0">message </span><span class="s1">availableScriptsIds</span><span class="s0">:</span><span class="s4">0</span><span class="s1">
-  </span><span class="s0">status</span><span class="s1">
+  </span><span class="s0">status </span><span class="s1">availableScriptsIds
   (
     scriptsIds</span><span class="s3">,</span><span class="s1">
   )
 
   </span><span class="s2">'Данные планировщика запуска скриптов'</span><span class="s1">
-  </span><span class="s0">message </span><span class="s1">scriptsRunTimings</span><span class="s0">:</span><span class="s4">1</span><span class="s1">
-  </span><span class="s0">status</span><span class="s1">
+  </span><span class="s0">status </span><span class="s1">scriptsRunTimings
   (
     scriptsRunTimings</span><span class="s3">,</span><span class="s1">
   )
@@ -1089,22 +1098,23 @@
 </span><span class="s0">type </span><span class="s1">file_list_error </span><span class="s0">enum ber </span><span class="s1">(NOT_FOUND = </span><span class="s4">1</span><span class="s3">, </span><span class="s1">CANT_READ = </span><span class="s4">2</span><span class="s3">, </span><span class="s1">NOT_DIR = </span><span class="s4">3</span><span class="s1">)
 </span><span class="s0">type </span><span class="s1">file_create_dir_error </span><span class="s0">enum ber </span><span class="s1">(NOT_FOUND = </span><span class="s4">1</span><span class="s3">, </span><span class="s1">CANT_WRITE = </span><span class="s4">2</span><span class="s1">)
 
+</span><span class="s2">&quot;Компонент поддерживающий управление файловой системой&quot;</span><span class="s1">
 </span><span class="s0">component </span><span class="s1">Files
 {
   </span><span class="s2">'Загрузить файл'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">uploadFile</span><span class="s0">:</span><span class="s4">0</span><span class="s1">(</span><span class="s2">'Информация о загружаемом файле' </span><span class="s1">full_file_info fileInfo) -&gt; file_upload_error?
+  </span><span class="s0">command </span><span class="s1">uploadFile(</span><span class="s2">'Информация о загружаемом файле' </span><span class="s1">full_file_info fileInfo) -&gt; file_upload_error?
 
   </span><span class="s2">'Скачать файл'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">downloadFile</span><span class="s0">:</span><span class="s4">1</span><span class="s1">(</span><span class="s2">'Путь до файла' </span><span class="s1">string path) -&gt; or&lt;full_file_info</span><span class="s3">, </span><span class="s1">file_download_error&gt;
+  </span><span class="s0">command </span><span class="s1">downloadFile(</span><span class="s2">'Путь до файла' </span><span class="s1">string path) -&gt; or&lt;full_file_info</span><span class="s3">, </span><span class="s1">file_download_error&gt;
 
   </span><span class="s2">'Удалить файл или каталог'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">deleteNode</span><span class="s0">:</span><span class="s4">2</span><span class="s1">(</span><span class="s2">'Путь до узла' </span><span class="s1">string path) -&gt; file_delete_error?
+  </span><span class="s0">command </span><span class="s1">deleteNode(</span><span class="s2">'Путь до узла' </span><span class="s1">string path) -&gt; file_delete_error?
 
   </span><span class="s2">'Запросить перечень файлов в каталоге'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">requestFileList</span><span class="s0">:</span><span class="s4">3</span><span class="s1">(</span><span class="s2">'Путь до каталога' </span><span class="s1">string path) -&gt; or&lt;[node_info]</span><span class="s3">, </span><span class="s1">file_list_error&gt;
+  </span><span class="s0">command </span><span class="s1">requestFileList(</span><span class="s2">'Путь до каталога' </span><span class="s1">string path) -&gt; or&lt;[node_info]</span><span class="s3">, </span><span class="s1">file_list_error&gt;
 
   </span><span class="s2">'Запросить создание каталога'</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">createDir</span><span class="s0">:</span><span class="s4">4</span><span class="s1">(</span><span class="s2">'Путь к каталогу' </span><span class="s1">string path) -&gt; file_create_dir_error?
+  </span><span class="s0">command </span><span class="s1">createDir(</span><span class="s2">'Путь к каталогу' </span><span class="s1">string path) -&gt; file_create_dir_error?
 }
 
 </span><span class="s2">&quot;Адрес абонента&quot;</span><span class="s1">
@@ -1133,16 +1143,16 @@
   )
 
   </span><span class="s2">&quot;Установить правило маршрутизации для абонента&quot;</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">setRoute</span><span class="s0">:</span><span class="s4">0</span><span class="s1">(</span><span class="s2">&quot;Адрес абонента&quot; </span><span class="s1">address address</span><span class="s3">, </span><span class="s2">&quot;Следующий узел в пути&quot; </span><span class="s1">address next_hop)
+  </span><span class="s0">command </span><span class="s1">setRoute(</span><span class="s2">&quot;Адрес абонента&quot; </span><span class="s1">address address</span><span class="s3">, </span><span class="s2">&quot;Следующий узел в пути&quot; </span><span class="s1">address next_hop)
 
   </span><span class="s2">&quot;Удалить все правила для абонента&quot;</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">delRoute</span><span class="s0">:</span><span class="s4">1</span><span class="s1">(</span><span class="s2">&quot;Адрес абонента&quot; </span><span class="s1">address address)
+  </span><span class="s0">command </span><span class="s1">delRoute(</span><span class="s2">&quot;Адрес абонента&quot; </span><span class="s1">address address)
 
   </span><span class="s2">&quot;Установить правило маршрутизации для абонента&quot;</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">setGroupRoute</span><span class="s0">:</span><span class="s4">2</span><span class="s1">(</span><span class="s2">&quot;Адрес группы&quot; </span><span class="s1">address groupAddress</span><span class="s3">, </span><span class="s2">&quot;Следующий узел в пути&quot; </span><span class="s1">address next_hop)
+  </span><span class="s0">command </span><span class="s1">setGroupRoute(</span><span class="s2">&quot;Адрес группы&quot; </span><span class="s1">address groupAddress</span><span class="s3">, </span><span class="s2">&quot;Следующий узел в пути&quot; </span><span class="s1">address next_hop)
 
   </span><span class="s2">&quot;Удалить все правила для группы&quot;</span><span class="s1">
-  </span><span class="s0">command </span><span class="s1">delGroupRoute</span><span class="s0">:</span><span class="s4">3</span><span class="s1">(</span><span class="s2">&quot;Адрес группы&quot; </span><span class="s1">address groupAddress)
+  </span><span class="s0">command </span><span class="s1">delGroupRoute(</span><span class="s2">&quot;Адрес группы&quot; </span><span class="s1">address groupAddress)
 }</span></pre>
     </div>
     <hr/>
