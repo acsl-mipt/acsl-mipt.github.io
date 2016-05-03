@@ -149,32 +149,23 @@
             <div>
                 <p>При использовании поверх TCP/IP-стека возможно несколько вариантов использования протокола.
                 <p>В случае замены адресации протокола на адресацию протокола IP возможно заменить все уровни ниже прикладного. В этом случае командный поток будет использовать TCP/IP-cтек, а телеметрический поток &mdash; UDP/IP:
-                    <table class="table" style="width:auto"><thead><th>Командный поток<th>Телеметрический поток
+                    <table class="table table-bordered">
+                        <thead><th>Командный поток<th>Телеметрический поток
                         <tbody>
-                            <tr><td>
-                                    <table class="table table-bordered"><tbody>
-                                        <tr><td><p class="text-center"><a href="#streams-app-cmd">Командный поток прикладного уровня</a>
-                                        <tr><td><p class="text-center">TCP
-                                        <tr><td><p class="text-center">IP
-                                        <tr><td><p class="text-center">Ethernet, ...
-                                    </tbody></table>
-                                <td>
-                                    <table class="table table-bordered"><tbody>
-                                        <tr><td><p class="text-center"><a href="#streams-app-tm">Телеметрический поток прикладного уровня</a>
-                                        <tr><td><p class="text-center">UDP
-                                        <tr><td><p class="text-center">IP
-                                        <tr><td><p class="text-center">Ethernet, ...
-                                    </tbody></table>
+                            <tr><td><p class="text-center"><a href="#streams-app-cmd">Командный поток прикладного уровня</a><td><p class="text-center"><a href="#streams-app-tm">Телеметрический поток прикладного уровня</a>
+                            <tr><td><p class="text-center">TCP<td><p class="text-center">UDP
+                            <tr><td colspan="2"><p class="text-center">IP
+                            <tr><td colspan="2"><p class="text-center">Ethernet, ...
                         </tbody>
                     </table>
-                <p>В случае, когда адресация протокола IP не соответствует требованиям и/или требуется объединение командного и телеметрического потоков в один, то возможно использование UDP вместо канального уровня протокола:
+                <p>В случае, когда адресация протокола IP не соответствует требованиям и/или требуется объединение командного и телеметрического потоков в один, то возможно использование UDP или TCP вместо канального уровня протокола:
                     <table class="table table-bordered" style="width:auto"><tbody>
-                        <tr><td><p class="text-center"><a href="#streams-app">Прикладной уровень</a>
-                        <tr><td><p class="text-center"><a href="#streams-exchange">Обменный уровень</a>
-                        <tr><td><p class="text-center"><a href="#streams-multiplexing">Мультиплексирование обменных потоков</a>
-                        <tr><td><p class="text-center">UDP
-                        <tr><td><p class="text-center">IP
-                        <tr><td><p class="text-center">Ethernet, ...
+                        <tr><td colspan="2"><p class="text-center"><a href="#streams-app">Прикладной уровень</a>
+                        <tr><td colspan="2"><p class="text-center"><a href="#streams-exchange">Обменный уровень</a>
+                        <tr><td colspan="2"><p class="text-center"><a href="#streams-multiplexing">Мультиплексирование обменных потоков</a>
+                        <tr><td><p class="text-center">UDP<td><p class="text-center">TCP
+                        <tr><td colspan="2"><p class="text-center">IP
+                        <tr><td colspan="2"><p class="text-center">Ethernet, ...
                     </tbody></table>
             </div>
             <hr/>
@@ -188,23 +179,16 @@
                         <tr><td><p class="text-center"><a href="#streams-multiplexing">Мультиплексирование обменных потоков</a>
                         <tr><td><p class="text-center">802.11
                     </tbody></table>
-                <p>Так же в случае организованной IP-сети поверх 802.11 возможен вариант использования TCP и UDP, как и в случае с использованием TCP/IP-стека поверх Ethernet (с теми же ограничениями) и др:
-                    <table class="table" style="width:auto"><thead><th>Командный поток<th>Телеметрический поток
+                <p>Так же в случае организованной IP-сети поверх 802.11 возможен вариант использования TCP и UDP, как и в случае с использованием TCP/IP-стека (с теми же ограничениями):
+                    <table class="table table-bordered">
+                        <thead><th>Командный поток<th>Телеметрический поток
                         <tbody>
-                            <tr><td>
-                                    <table class="table table-bordered"><tbody>
-                                        <tr><td><p class="text-center"><a href="#streams-app-cmd">Командный поток прикладного уровня</a>
-                                        <tr><td><p class="text-center">TCP
-                                        <tr><td><p class="text-center">802.11
-                                    </tbody></table>
-                                <td>
-                                    <table class="table table-bordered"><tbody>
-                                        <tr><td><p class="text-center"><a href="#streams-app-tm">Телеметрический поток прикладного уровня</a>
-                                        <tr><td><p class="text-center">UDP
-                                        <tr><td><p class="text-center">802.11
-                                    </tbody></table>
-                        </tbody>
-                    </table>
+                        <tr><td><p class="text-center"><a href="#streams-app-cmd">Командный поток прикладного уровня</a>
+                            <td><p class="text-center"><a href="#streams-app-tm">Телеметрический поток прикладного уровня</a>
+                        <tr><td><p class="text-center">TCP
+                            <td><p class="text-center">UDP
+                        <tr><td colspan="2"><p class="text-center">802.11
+                    </tbody></table>
             </div>
         </div>
         <hr/>
